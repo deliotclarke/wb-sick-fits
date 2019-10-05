@@ -38,6 +38,8 @@ export default class Items extends Component {
         <Pagination page={this.props.page}></Pagination>
         <Query
           query={ALL_ITEMS_QUERY}
+          //this would only hit the network not the cache
+          //! fetchPolicy="network-only"
           variables={{
             skip: this.props.page * perPage - perPage
           }}>
