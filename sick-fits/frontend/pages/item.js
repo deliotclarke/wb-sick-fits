@@ -1,6 +1,8 @@
+import SingleItem from '../components/SingleItem';
+
 const Item = props => (
   <div>
-    <p>single Item!</p>
+    <SingleItem />
   </div>
 );
 
