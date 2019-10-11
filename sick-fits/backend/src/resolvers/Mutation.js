@@ -58,7 +58,7 @@ const mutations = {
       info
     );
     // create the jwt token for them
-    const tokey = jtw.sign({ userId: user.id }, process.env.APP_SECRET);
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     // set the jwt as a cookie on the response
     ctx.response.cookie('token', token, {
       httpOnly: true,
