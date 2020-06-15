@@ -23,10 +23,10 @@ class Signup extends Component {
   state = {
     email: '',
     name: '',
-    password: ''
+    password: '',
   };
 
-  saveToState = e => {
+  saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -36,8 +36,8 @@ class Signup extends Component {
         {(signup, { error, loading }) => {
           return (
             <Form
-              method="post"
-              onSubmit={async e => {
+              method='post'
+              onSubmit={async (e) => {
                 e.preventDefault();
                 await signup();
                 this.setState({ email: '', name: '', password: '' });
@@ -46,37 +46,37 @@ class Signup extends Component {
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Sign Up for An Account</h2>
                 <Error error={error} />
-                <label htmlFor="email">
+                <label htmlFor='email'>
                   Email
                   <input
-                    type="email"
-                    name="email"
-                    placeholder="one email please"
+                    type='email'
+                    name='email'
+                    placeholder='one email please'
                     value={this.state.email}
                     onChange={this.saveToState}
                   />
                 </label>
-                <label htmlFor="name">
+                <label htmlFor='name'>
                   Name
                   <input
-                    type="text"
-                    name="name"
-                    placeholder="your whole name"
+                    type='text'
+                    name='name'
+                    placeholder='your whole name'
                     value={this.state.name}
                     onChange={this.saveToState}
                   />
                 </label>
-                <label htmlFor="password">
+                <label htmlFor='password'>
                   Password
                   <input
-                    type="password"
-                    name="password"
-                    placeholder="passsssswerd"
+                    type='password'
+                    name='password'
+                    placeholder='passsssswerd'
                     value={this.state.password}
                     onChange={this.saveToState}
                   />
                 </label>
-                <button type="submit">GET SIIICK!</button>
+                <button type='submit'>GET SIIICK!</button>
               </fieldset>
             </Form>
           );

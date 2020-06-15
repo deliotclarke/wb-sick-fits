@@ -8,7 +8,7 @@ import Error from './ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
-    item(where: {id: $id}) {
+    item(where: { id: $id }) {
       id
       title
       description
@@ -45,8 +45,8 @@ export default class UpdateItem extends Component {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
 
-    this.setState({ [name]: val })
-  }
+    this.setState({ [name]: val });
+  };
 
   updateItem = async (e, updateItemMutation) => {
     e.preventDefault();
@@ -57,76 +57,77 @@ export default class UpdateItem extends Component {
       variables: {
         id: this.props.id,
         ...this.state,
-      }
+      },
     });
     console.log('updated');
-  }
+  };
 
   render() {
     return (
       <Query
         query={SINGLE_ITEM_QUERY}
         variables={{
-          id: this.props.id
+          id: this.props.id,
         }}
       >
         {({ data, loading }) => {
           if (loading) return <p>loading...</p>;
-          if (!data.item) return <p>No Item Found for Id {this.props.id}</p>
+          if (!data.item) return <p>No Item Found for Id {this.props.id}</p>;
           return (
-
             <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
               {(updateItem, { loading, error }) => (
-                <Form onSubmit={e => this.updateItem(e, updateItem)}>
+                <Form onSubmit={(e) => this.updateItem(e, updateItem)}>
                   <Error error={error} />
                   <fieldset disabled={loading} aria-busy={loading}>
-                    <label htmlFor="title">
+                    <label htmlFor='title'>
                       Title
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        placeholder="Title"
+                      <input
+                        type='text'
+                        id='title'
+                        name='title'
+                        placeholder='Title'
                         required
                         defaultValue={data.item.title}
                         onChange={this.handleChange}
                       />
                     </label>
 
-                    <label htmlFor="price">
+                    <label htmlFor='price'>
                       Price
-                    <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        placeholder="Price"
+                      <input
+                        type='number'
+                        id='price'
+                        name='price'
+                        placeholder='Price'
                         required
                         defaultValue={data.item.price}
                         onChange={this.handleChange}
                       />
                     </label>
 
-                    <label htmlFor="description">
+                    <label htmlFor='description'>
                       Description
-                    <textarea
-                        id="description"
-                        name="description"
-                        placeholder="Enter A Description"
+                      <textarea
+                        id='description'
+                        name='description'
+                        placeholder='Enter A Description'
                         required
                         defaultValue={data.item.description}
                         onChange={this.handleChange}
                       />
                     </label>
-                    <button type="submit" >Sav{loading ? 'ing' : 'e'} Changes</button>
+                    <button type='submit'>
+                      Sav{loading ? 'ing' : 'e'} Changes
+                    </button>
                   </fieldset>
                 </Form>
               )}
             </Mutation>
-          )
+          );
         }}
       </Query>
     );
   }
 }
 
-export { UPDATE_ITEM_MUTATION }
+export { UPDATE_ITEM_MUTATION };
